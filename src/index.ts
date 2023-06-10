@@ -2,10 +2,10 @@
 
 import * as THREE from 'three';
 import { TextureLoader } from 'three';
-import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
+// import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let model1;
 let rectLight1;
@@ -138,8 +138,8 @@ function init3D() {
   });
 
   // Add controls
-  const controls1 = new OrbitControls(camera1, renderer.domElement);
-  controls1.enableDamping = true;
+  // const controls1 = new OrbitControls(camera1, renderer.domElement);
+  // controls1.enableDamping = true;
 
   // Add axes to the scene
   // const axesHelper1 = new THREE.AxesHelper(6);
@@ -156,7 +156,7 @@ function init3D() {
     if (mixer !== null) {
       mixer.update(delta);
     }
-    controls1.update();
+    // controls1.update();
     const totalRunTime = 5.3;
     const totalTime = 5;
     const circumference = 2 * Math.PI;
@@ -226,7 +226,7 @@ function init3D() {
     model1.translateY(getYshift());
     model1.translateZ(0.575);
 
-    controls1.update();
+    // controls1.update();
 
     // initialize mixer after model1 is loaded
     mixer = new THREE.AnimationMixer(model1);
