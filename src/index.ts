@@ -2,10 +2,10 @@
 
 import * as THREE from 'three';
 import { TextureLoader } from 'three';
-// import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
+import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let model1;
 let rectLight1;
@@ -138,8 +138,8 @@ function init3D() {
   });
 
   // Add controls
-  // const controls1 = new OrbitControls(camera1, renderer.domElement);
-  // controls1.enableDamping = true;
+  const controls1 = new OrbitControls(camera1, renderer.domElement);
+  controls1.enableDamping = true;
 
   // Add axes to the scene
   // const axesHelper1 = new THREE.AxesHelper(6);
@@ -197,7 +197,7 @@ function init3D() {
   assets.then((data) => {
     model1 = data.model1.scene;
     const { animations } = data.model1;
-    // console.log(animations);
+    console.log(animations);
 
     // const { texture } = data;
 
@@ -267,7 +267,7 @@ function loadTexture(url) {
 function loadModel(url, id) {
   return new Promise((resolve, reject) => {
     modelLoader.load(url, (gltf) => {
-      // console.log(gltf);
+      console.log(gltf);
       const { scene } = gltf;
       const { animations } = gltf;
       resolve({ scene, animations });
