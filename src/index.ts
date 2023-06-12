@@ -84,7 +84,7 @@ function init3D() {
   camera1.updateProjectionMatrix(); // Must call after changing properties of the camera1
 
   // setting up lights
-  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.00375);
+  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.00575);
   dirLight.position.set(10, 10, 10);
   scene1.add(dirLight);
 
@@ -208,7 +208,7 @@ function init3D() {
     });
 
     newMaterial.bumpMap = bumpTexture;
-    newMaterial.bumpScale = 0.0035;
+    newMaterial.bumpScale = 0.0015;
 
     model1.traverse((node) => {
       if (node.isMesh) {
