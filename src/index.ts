@@ -92,22 +92,22 @@ function init3D() {
 
   RectAreaLightUniformsLib.init();
 
-  rectLight1 = new THREE.RectAreaLight(0xffffff, 0.225, 1, 1);
+  rectLight1 = new THREE.RectAreaLight(0xffffff, 2, 1, 1);
   rectLight1.position.set(0, 0.5, 3);
   rectLight1.lookAt(2, 0, 0);
   scene1.add(rectLight1);
 
-  rectLight2 = new THREE.RectAreaLight(0xffffff, 0.125, 0.75, 2);
+  rectLight2 = new THREE.RectAreaLight(0xffffff, 0.5, 0.75, 2);
   rectLight2.position.set(0, -0.25, 3);
   rectLight2.lookAt(2, 0.5, 0);
   scene1.add(rectLight2);
 
-  rectLight3 = new THREE.RectAreaLight(0xffffff, 0.05, 0.5, 2);
+  rectLight3 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 2);
   rectLight3.position.set(0, 0.25, 3);
   rectLight3.lookAt(2, -1, 1);
   scene1.add(rectLight3);
 
-  rectLight4 = new THREE.RectAreaLight(0xffffff, 0.05, 0.5, 2);
+  rectLight4 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 2);
   rectLight4.position.set(0, -0.25, 3);
   rectLight4.lookAt(2, -1, 1);
   scene1.add(rectLight4);
