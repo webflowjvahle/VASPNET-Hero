@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@finsweet/ts-utils": "^0.39.1",
-    "three": "^0.153.0"
+    "three": "^0.153.0",
+    "three-subdivision-modifier": "^1.0.5"
   }
 }

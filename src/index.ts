@@ -6,8 +6,9 @@ import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { LoopSubdivision } from 'LoopSubdivision.js';
 
-let model1;
+/*let model1;
 let rectLight1;
 let rectLight2;
 let rectLight3;
@@ -210,12 +211,16 @@ function init3D() {
     newMaterial.bumpMap = bumpTexture;
     newMaterial.bumpScale = 0.0015;
 
+    const subdivisionLevel = 1; // Define the subdivision level here
+
     model1.traverse((node) => {
       if (node.isMesh) {
+        const modifier = new SubdivisionModifier(subdivisionLevel);
+        const smooth = modifier.modify(node.geometry);
+        node.geometry = smooth;
+
         node.material = newMaterial;
         node.material.needsUpdate = true;
-        // console.log(node.material);
-        // console.log('textureChange');
       }
     });
 
@@ -238,8 +243,7 @@ function init3D() {
     scene1.add(model1);
   });
 }
-
-/* Loader Functions */
+ Loader Functions
 async function load() {
   model1 = await loadModel(
     'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/647df5310fe77bc6a9a42bd5_VASPnet-HomePage-HeroSection-3D%20Symbol%20Flowing%20Animation.-Transperancy%20Fix%20V2.glb.txt'
@@ -273,4 +277,72 @@ function loadModel(url, id) {
       resolve({ scene, animations });
     });
   });
+}
+*/
+
+let container, camera, scene, renderer, mesh, mixer;
+
+init();
+animate();
+
+function init() {
+  const viewport1 = document.querySelector('[data-3d="c"]');
+  const parentElement1 = viewport1.parentElement; // Get the parent element for viewport1
+
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
+  camera.position.y = 300;
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xf0f0f0);
+
+  const light1 = new THREE.DirectionalLight(0xefefff, 1.5);
+  light1.position.set(1, 1, 1).normalize();
+  scene.add(light1);
+
+  const light2 = new THREE.DirectionalLight(0xffefef, 1.5);
+  light2.position.set(-1, -1, -1).normalize();
+  scene.add(light2);
+
+  const loader = new GLTFLoader();
+  loader.load(
+    'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/647df5310fe77bc6a9a42bd5_VASPnet-HomePage-HeroSection-3D%20Symbol%20Flowing%20Animation.-Transperancy%20Fix%20V2.glb.txt',
+    function (gltf) {
+      mesh = gltf.scene;
+      scene.add(mesh);
+
+      const modifier = new LoopSubdivisionModifier(2);
+      const subdividedGeometry = modifier.modify(mesh.geometry);
+
+      mesh.geometry = subdividedGeometry;
+
+      mixer = new THREE.AnimationMixer(mesh);
+      mixer.clipAction(gltf.animations[0]).setDuration(1).play();
+    }
+  );
+
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(parentElement1.clientWidth, parentElement1.clientHeight);
+  viewport1.appendChild(renderer.domElement);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+  container.appendChild(renderer.domElement);
+
+  window.addEventListener('resize', onWindowResize);
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+}
+
+function render() {
+  renderer.render(scene, camera);
 }
