@@ -203,7 +203,7 @@ function init3D() {
 
     const newMaterial = new THREE.MeshStandardMaterial({
       metalness: 0.2,
-      roughness: 0.3725,
+      roughness: 0.3525,
       // map: texturefile,
     });
 
@@ -242,7 +242,7 @@ function init3D() {
 /* Loader Functions */
 async function load() {
   model1 = await loadModel(
-    'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/64899f1ec51875fda68f5a54_VASPnet-HomePage-HeroSection-3D%20Symbol%20Flowing%20Animation.-Transperancy%20Fix%20V5.glb.txt'
+    'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/6489acffcc09ab630688cc68_VASPnet-HomePage-HeroSection-3D%20Symbol%20Flowing%20Animation.-No%20Compression.glb.txt'
   );
 
   const texture = await loadTexture(
