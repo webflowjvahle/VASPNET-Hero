@@ -51,7 +51,7 @@ function getzoomshift() {
 let currentTime = 0;
 
 const bumpTexture = new THREE.TextureLoader().load(
-  'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/6463925c61d09e9e0d0a1415_VASPnet-MainTextureV4.png'
+  'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/647e626b5bfd581b4a1c3664_bumpmap.jpg'
 );
 
 window.Webflow ||= [];
@@ -84,7 +84,7 @@ function init3D() {
   camera1.updateProjectionMatrix(); // Must call after changing properties of the camera1
 
   // setting up lights
-  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.05);
+  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.00675);
   dirLight.position.set(10, 10, 10);
   scene1.add(dirLight);
 
@@ -102,12 +102,12 @@ function init3D() {
   rectLight2.lookAt(2, 0.5, 0);
   scene1.add(rectLight2);
 
-  rectLight3 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 0.5);
+  rectLight3 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 2);
   rectLight3.position.set(0, 0.25, 3);
   rectLight3.lookAt(2, -1, 1);
   scene1.add(rectLight3);
 
-  rectLight4 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 0.5);
+  rectLight4 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 2);
   rectLight4.position.set(0, -0.25, 3);
   rectLight4.lookAt(2, -1, 1);
   scene1.add(rectLight4);
@@ -203,12 +203,12 @@ function init3D() {
 
     const newMaterial = new THREE.MeshStandardMaterial({
       metalness: 0.2,
-      roughness: 0.3,
+      roughness: 0.65,
       // map: texturefile,
     });
 
     newMaterial.bumpMap = bumpTexture;
-    newMaterial.bumpScale = 0.00175;
+    newMaterial.bumpScale = 0.0015;
 
     model1.traverse((node) => {
       if (node.isMesh) {
