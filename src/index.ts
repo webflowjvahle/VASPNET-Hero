@@ -80,11 +80,11 @@ function init3D() {
   // Zoom in or out with the camera
 
   camera1.zoom = 1; // Zoom in to half the original size
-  camera1.position.set(-40, 0, 5);
+  camera1.position.set(-60, 0, 5);
   camera1.updateProjectionMatrix(); // Must call after changing properties of the camera1
 
   // setting up lights
-  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.00675);
+  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.00975);
   dirLight.position.set(10, 10, 10);
   scene1.add(dirLight);
 
@@ -203,7 +203,7 @@ function init3D() {
 
     const newMaterial = new THREE.MeshStandardMaterial({
       metalness: 0.2,
-      roughness: 0.65,
+      roughness: 0.55,
       // map: texturefile,
     });
 
