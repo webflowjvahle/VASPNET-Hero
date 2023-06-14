@@ -80,7 +80,7 @@ function init3D() {
   // Zoom in or out with the camera
 
   camera1.zoom = 1; // Zoom in to half the original size
-  camera1.position.set(-60, 0, 5);
+  camera1.position.set(-60, 0.25, 5);
   camera1.updateProjectionMatrix(); // Must call after changing properties of the camera1
 
   // setting up lights
@@ -197,18 +197,18 @@ function init3D() {
   assets.then((data) => {
     model1 = data.model1.scene;
     const { animations } = data.model1;
-    console.log(animations);
+    // console.log(animations);
 
     // const { texture } = data;
 
     const newMaterial = new THREE.MeshStandardMaterial({
       metalness: 0.2,
-      roughness: 0.55,
+      roughness: 0.3725,
       // map: texturefile,
     });
 
     newMaterial.bumpMap = bumpTexture;
-    newMaterial.bumpScale = 0.0015;
+    newMaterial.bumpScale = 0.00035;
 
     model1.traverse((node) => {
       if (node.isMesh) {
@@ -242,7 +242,7 @@ function init3D() {
 /* Loader Functions */
 async function load() {
   model1 = await loadModel(
-    'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/647df5310fe77bc6a9a42bd5_VASPnet-HomePage-HeroSection-3D%20Symbol%20Flowing%20Animation.-Transperancy%20Fix%20V2.glb.txt'
+    'https://dl.dropbox.com/s/dgmc4ogmaky68c1/VASPnet-HomePage-HeroSection-3D%20Symbol%20Flowing%20Animation.-No%20Compression.glb'
   );
 
   const texture = await loadTexture(
