@@ -13,10 +13,10 @@ let rectLight2;
 let rectLight3;
 let rectLight4;
 
-let lightAngle1 = 3.2;
-let lightAngle2 = 3.2;
-let lightAngle3 = 3;
-let lightAngle4 = 3;
+let lightAngle1 = 1.25;
+let lightAngle2 = 1.625;
+let lightAngle3 = 1.5;
+let lightAngle4 = 1.7;
 
 const break1 = 992;
 const break2 = 768;
@@ -32,7 +32,7 @@ function getYshift() {
   if (window.innerWidth < break1) {
     return -1;
   }
-  return -0.95;
+  return -1;
 }
 
 function getzoomshift() {
@@ -45,13 +45,13 @@ function getzoomshift() {
   if (window.innerWidth < break1) {
     return 0.04;
   }
-  return 0.03825;
+  return 0.04;
 }
 
 let currentTime = 0;
 
 const bumpTexture = new THREE.TextureLoader().load(
-  'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/647e626b5bfd581b4a1c3664_bumpmap.jpg'
+  'https://uploads-ssl.webflow.com/646283aaab5c997eb0483d18/6463925c61d09e9e0d0a1415_VASPnet-MainTextureV4.png'
 );
 
 window.Webflow ||= [];
@@ -80,38 +80,35 @@ function init3D() {
   // Zoom in or out with the camera
 
   camera1.zoom = 1; // Zoom in to half the original size
-  camera1.position.set(-60, 0.5, 5);
+  camera1.position.set(-40, 0, 5);
   camera1.updateProjectionMatrix(); // Must call after changing properties of the camera1
 
   // setting up lights
-  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.00525);
+  const dirLight = new THREE.DirectionalLight(0xfffffff, 0.05);
   dirLight.position.set(10, 10, 10);
   scene1.add(dirLight);
-
-  // const ambientLight = new THREE.AmbientLight(0xffffff, 0.0125);
-  // scene1.add(ambientLight);
 
   // rotating lights
 
   RectAreaLightUniformsLib.init();
 
-  rectLight1 = new THREE.RectAreaLight(0xffffff, 0.75, 1, 1);
-  rectLight1.position.set(0, 1, 0);
-  rectLight1.lookAt(0, 0, 0);
+  rectLight1 = new THREE.RectAreaLight(0xffffff, 2, 1, 1);
+  rectLight1.position.set(0, 0.5, 3);
+  rectLight1.lookAt(2, 0, 0);
   scene1.add(rectLight1);
 
-  rectLight2 = new THREE.RectAreaLight(0xffffff, 0.5, 0.75, 0.75);
-  rectLight2.position.set(0, -0.25, 0);
-  rectLight2.lookAt(0, 0, 0);
+  rectLight2 = new THREE.RectAreaLight(0xffffff, 0.5, 0.75, 2);
+  rectLight2.position.set(0, -0.25, 3);
+  rectLight2.lookAt(2, 0.5, 0);
   scene1.add(rectLight2);
 
-  rectLight3 = new THREE.RectAreaLight(0xffffff, 0.25, 0.5, 0.5);
-  rectLight3.position.set(0, 0.25, 0);
+  rectLight3 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 0.5);
+  rectLight3.position.set(0, 0.25, 3);
   rectLight3.lookAt(2, -1, 1);
   scene1.add(rectLight3);
 
-  rectLight4 = new THREE.RectAreaLight(0xffffff, 0.125, 0.5, 0.5);
-  rectLight4.position.set(0, -0.75, 0);
+  rectLight4 = new THREE.RectAreaLight(0xffffff, 0.0225, 0.5, 0.5);
+  rectLight4.position.set(0, -0.25, 3);
   rectLight4.lookAt(2, -1, 1);
   scene1.add(rectLight4);
 
@@ -161,7 +158,7 @@ function init3D() {
     }
     // controls1.update();
     const totalRunTime = 5.3;
-    const totalTime = 5.3;
+    const totalTime = 5;
     const circumference = 2 * Math.PI;
     const speed = circumference / totalTime;
     const distance = speed * delta;
@@ -176,16 +173,16 @@ function init3D() {
 
       rectLight1.position.x = radius * Math.sin(lightAngle1);
       rectLight1.position.z = 0.6725 + radius * Math.cos(lightAngle1);
-      rectLight1.lookAt(0, -10, 0.575);
+      rectLight1.lookAt(2, 4, 0);
       rectLight2.position.x = radius * Math.sin(lightAngle2);
       rectLight2.position.z = 0.6725 + radius * Math.cos(lightAngle2);
-      rectLight2.lookAt(0, 0, 0.575);
+      rectLight2.lookAt(2, 4, 0);
       rectLight3.position.x = radius * Math.sin(lightAngle3);
       rectLight3.position.z = 0.6725 + radius * Math.cos(lightAngle3);
-      rectLight3.lookAt(0, -1, 0.575);
+      rectLight3.lookAt(2, -1, 1);
       rectLight4.position.x = radius * Math.sin(lightAngle4);
       rectLight4.position.z = 0.6725 + radius * Math.cos(lightAngle4);
-      rectLight4.lookAt(0, -1, 0.575);
+      rectLight4.lookAt(2, -1, 1);
     }
     if (currentTime > totalRunTime) {
       currentTime = 0;
@@ -206,12 +203,12 @@ function init3D() {
 
     const newMaterial = new THREE.MeshStandardMaterial({
       metalness: 0.2,
-      roughness: 0.1,
+      roughness: 0.3,
       // map: texturefile,
     });
 
     newMaterial.bumpMap = bumpTexture;
-    newMaterial.bumpScale = 0.0000575;
+    newMaterial.bumpScale = 0.00175;
 
     model1.traverse((node) => {
       if (node.isMesh) {
